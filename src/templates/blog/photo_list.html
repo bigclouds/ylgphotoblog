@@ -20,7 +20,7 @@
     <hr>
     <p class="tag-description">Pictures tagged with #{{ tag }}</p>
     {% if request.user.is_superuser %}
-      <a href="{% url 'admin:tagging_tag_change' tag.pk %}" target="_blank">Edit tag</a>
+       <a href="{% url 'admin:tagging_tag_change' tag.pk %}" target="_blank">Edit tag</a>
     {% endif %}
   </div>
 	{% for photo in object_list %}
