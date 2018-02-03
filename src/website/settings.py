@@ -21,6 +21,7 @@ DATABASES = {
 
 INSTALLED_APPS = [
     'blog.apps.BlogConfig',
+    'contact_form.apps.ContactFormConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
     'tagging',
     'ckeditor',
     'ckeditor_uploader',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -101,7 +103,7 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# Email backend
+# Email backend and contact form
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -111,6 +113,13 @@ else:
     EMAIL_HOST_USER = ''  # E.g. user@gmail.com
     EMAIL_HOST_PASSWORD = ''
     EMAIL_PORT = 587
+
+# Contact Form
+
+CONTACT_FORM_EMAIL = config('CONTACT_FORM_EMAIL')
+CONTACT_PAGE_DESCRIPTION = config(
+    'CONTACT_PAGE_DESCRIPTION',
+    default='Send me a message using the form below.')
 
 
 # Thumbnails

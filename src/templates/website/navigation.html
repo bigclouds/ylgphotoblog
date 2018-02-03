@@ -16,6 +16,9 @@
         <a class="nav-link" href="{% url 'page-view' slug=item.slug %}">{{ item.title }}</a>
       </li>
       {% endfor %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact-page' %}">Contact</a>
+      </li>      
     </ul>
     <ul class="navbar-nav ml-auto">
       {% if request.user.is_superuser %}

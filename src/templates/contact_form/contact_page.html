@@ -1,0 +1,39 @@
+{% extends 'website/base.html' %}
+{% load widget_tweaks %}
+
+{% block meta %}
+<title>Contact</title>
+<meta name="description" content="">
+{% endblock meta %}
+
+
+{% block content %}
+<div class="container">
+	<div class="row no-gutters">
+		<div class="col contact-page">
+			<h1>Contact</h1>
+			<p>{{ description }}</p>
+			<hr>
+		    {% if messages %}
+			    {% for message in messages %}
+			        <div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissable"{% endif %}>
+			            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			            {{ message }}
+			        </div>
+			    {% endfor %}
+		    {% endif %}
+		    <form method="post">{% csrf_token %}
+	            {{ form.non_field_errors }}
+	            <div class="form-group">
+	                {{ form.errors }}
+	                {% render_field form.from_email class+="form-control" placeholder="Email:" %}
+	            </div>
+	            <div class="form-group">
+	                {% render_field form.message class+="form-control" placeholder="Message:" rows=7 %}
+	            </div>
+	            <button type="submit" class="btn btn-dark">Send message</button>
+		    </form>
+		</div>
+	</div>
+</div>
+{% endblock content %}
