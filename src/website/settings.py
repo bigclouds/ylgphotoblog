@@ -125,9 +125,9 @@ if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
     EMAIL_USE_TLS = True
-    EMAIL_HOST = ''  # E.g. smtp.gmail.com
-    EMAIL_HOST_USER = ''  # E.g. user@gmail.com
-    EMAIL_HOST_PASSWORD = ''
+    EMAIL_HOST = config('EMAIL_HOST')
+    EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
     EMAIL_PORT = 587
 
 # Contact Form
