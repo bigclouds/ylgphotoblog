@@ -1,8 +1,7 @@
 from django.shortcuts import render
-
+from django.views.generic.detail import DetailView
 from tagging.views import TaggedObjectList
-
-from .models import Photo
+from .models import Page, Photo
 
 
 def index(request):
@@ -14,3 +13,7 @@ def index(request):
 
 class TagView(TaggedObjectList):
     model = Photo
+
+
+class PageView(DetailView):
+    model = Page

@@ -11,9 +11,11 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
       </li>
+      {% for item in nav_items %}
       <li class="nav-item">
-        <a class="nav-link" href="#">About me</a>
+        <a class="nav-link" href="{% url 'page-view' slug=item.slug %}">{{ item.title }}</a>
       </li>
+      {% endfor %}
     </ul>
   </div>
 </div>

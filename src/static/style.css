@@ -154,3 +154,8 @@ body {
 	padding: 0.2em;
 	line-height: 2em;
 }
+
+.page-content img {
+    max-width: 100%;
+    height: auto;
+}

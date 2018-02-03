@@ -12,14 +12,14 @@
   <div class="col-md-3 py-4 px-4 text-center align-self-center">
     {% tag_cloud_for_model blog.photo as tag_cloud %}
     {% for tag_ in tag_cloud %}
-      <a class="tag {% if tag_ == tag %}active{% endif %}" style="font-size:{{ tag_.count|add:9 }}px" href="{% url 'tag_view' tag=tag_ %}">{{ tag_ }} <!-- ({{ tag.count }}) --></a>
+      <a class="tag {% if tag_ == tag %}active{% endif %}" style="font-size:{{ tag_.count|add:9 }}px" href="{% url 'tag-view' tag=tag_ %}">{{ tag_ }} <!-- ({{ tag.count }}) --></a>
     {% endfor %}
   </div>
   <div class="col-md-3 py-4 px-4 text-center heading-col">
     <h1>{{ tag }}</h1>
     <hr>
     <p class="tag-description">Pictures tagged with #{{ tag }}</p>
-  </div>  
+  </div>
 	{% for photo in object_list %}
 		<div class="col-md-3 mx-0">
 			<img class="img-fluid thumbnail-image" src="{{ photo.image|thumbnail_url:'gallery_thumb' }}" alt="Hello, World!" data-toggle="modal" data-target="#exampleModal" data-slide="#slide-{{ photo.pk }}">
@@ -30,7 +30,7 @@
     <h2>See also</h5>
     <hr>
     {% for t in related_tags %}
-      <a class="related-tag" href="{% url 'tag_view' tag=t %}">#{{ t }} <!-- ({{ tag.count }}) --></a>
+      <a class="related-tag" href="{% url 'tag-view' tag=t %}">#{{ t }} <!-- ({{ tag.count }}) --></a>
     {% endfor %}
   </div>
   {% endif %}

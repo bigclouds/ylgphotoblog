@@ -6,8 +6,9 @@ from django.urls import include, path
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
-    path('', include('blog.urls')),
     path('admin/', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('', include('blog.urls')),
 ]
 
 if settings.DEBUG:
