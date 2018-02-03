@@ -10,7 +10,7 @@ from .forms import ContactForm
 
 
 def send_email(from_name, from_email, to_emails, subject, message):
-    headers = {'Reply-To': from_email}
+    headers = {'Reply-To': from_email, 'From': from_name}
     email = EmailMessage(subject, message, from_name, to=to_emails,
                          headers=headers)
     email.send()
