@@ -19,6 +19,9 @@
     <h1>{{ tag }}</h1>
     <hr>
     <p class="tag-description">Pictures tagged with #{{ tag }}</p>
+    {% if request.user.is_superuser %}
+      <a href="{% url 'admin:tagging_tag_change' tag.pk %}" target="_blank">Edit tag</a>
+    {% endif %}
   </div>
 	{% for photo in object_list %}
 		<div class="col-md-3 mx-0">
@@ -46,7 +49,7 @@
                 <div id="carouselExampleControls" class="carousel" data-interval="false">
                   <div class="carousel-inner">
                     {% for photo in object_list %}
-                    <div id="slide-{{ photo.pk }}" class="carousel-item" data-title="{{ photo.title }}" data-description="{{ photo.description }}" data-tags="{{ photo.tags }}" data-date="{{ photo.date }}">
+                    <div id="slide-{{ photo.pk }}" class="carousel-item" data-pk="{{ photo.pk }}" data-title="{{ photo.title }}" data-description="{{ photo.description }}" data-tags="{{ photo.tags }}" data-date="{{ photo.date }}">
                       <img class="img-fluid" src="{{ photo.image|thumbnail_url:'carousel' }}" alt="{{ photo.title }}">
                     </div>
                     {% endfor %}
@@ -67,6 +70,9 @@
                 <p><span class="photo-date"></span></p>
                 <p><span class="photo-tags"></span></p>
                 <p class="photo-description"></p>
+                {% if request.user.is_superuser %}
+                  <a class="edit-link" href="" target="_blank">Edit photo</a>
+                {% endif %}
                 <hr class="mt-5">
                 <div class="social-icons">
                   <i class="fab fa-facebook"></i>

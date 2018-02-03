@@ -12,10 +12,12 @@ $('#exampleModal').on('show.bs.modal', function (event) {
   var description = slide.data('description');
   var tags = slide.data('tags');
   var date = slide.data('date');
+  var pk = slide.data('pk');
   ($('.photo-title')).text(title);
   ($('.photo-description')).text(description);
   ($('.photo-tags')).text(tags);
   ($('.photo-date')).text(date);
+  ($('.edit-link')).attr('href', '/admin/blog/photo/' + pk + '/change/')
   slide.addClass('active');
 })
 
@@ -33,10 +35,12 @@ $('#carouselExampleControls').on('slide.bs.carousel', function (event) {
   var description = relatedTarget.data('description');
   var tags = relatedTarget.data('tags');
   var date = relatedTarget.data('date');
+  var pk = relatedTarget.data('pk');
   ($('.photo-title')).text(title);
   ($('.photo-description')).text(description);
   ($('.photo-tags')).text(tags);
   ($('.photo-date')).text(date);
+  ($('.edit-link')).attr('href', '/admin/blog/photo/' + pk + '/change/')
 })
 
 </script>
