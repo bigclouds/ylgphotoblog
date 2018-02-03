@@ -1,0 +1,10 @@
+dj-database-url==0.4.2
+Django==2.0.1
+django-tagging==0.4.6
+easy-thumbnails==2.5
+gunicorn==19.7.1
+Pillow==5.0.0
+psycopg2==2.7.3.2
+python-decouple==3.1
+pytz==2017.3
+whitenoise==3.3.1

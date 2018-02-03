@@ -1,0 +1,156 @@
+body {
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	margin-top: 75px;
+}
+
+.container {
+	max-width: 935px;
+	margin: 0 auto 30px;
+}
+
+.modal {
+    text-align: center;
+    width: 100%;
+    background-color:rgba(0,0,0,0.5);
+}
+
+.modal-content {
+	border-radius: 0;
+	border: none;
+}
+.modal-body {
+	padding: 0;
+	background-color:  #fdf2e9;
+}
+
+.modal .photo-info {
+    text-align: left;
+    font-size: 0.8em;
+    padding: 2.5em 4em 2em 1em;
+}
+
+.modal .social-icons {
+	font-size: 2em;
+}
+
+.modal .photo-date {
+	font-size: 0.7em;
+}
+
+.modal .photo-title {
+    font-size: 1.2em;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    padding-bottom: .5em;
+    margin-bottom: 0;
+}
+
+.modal .photo-tags {
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 1.2px;
+}
+
+.modal .photo-description {
+    font-style: italic;
+    font-size: 1.5em;
+    letter-spacing: 1.2px;
+}
+
+.modal-lg {
+	max-width: 1200px;
+}
+
+.modal-dialog {
+    width: 100%;
+}
+
+.modal-header, .modal-footer {
+	border: none;
+}
+
+.img-fluid  {
+    max-height: calc(100vh - 75px);
+}
+
+.carousel-control-prev {
+	width: 3em;
+}
+
+.carousel-control-next {
+	width: 3em;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' stroke='%23000' stroke-width='0.4' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' stroke='%23000' stroke-width='0.4' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+.navbar {
+    background-color: #fdf2e9;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.navbar a {
+    color: #333;
+}
+
+.tag {
+	border: 1px solid #333;
+	margin: 0.4em;
+	padding: 0.3em;
+	background-color: rgba(0,0,0,0.5);
+	color: #fff;
+}
+
+.tag:hover {
+	text-decoration: none;
+	background-color: rgba(0,0,0,0.4);
+	color: #ddd;
+}
+
+.tag.active {
+	background-color: rgba(0,0,0,1);
+}
+
+.tag-description {
+	margin-top: 2.7em;
+}
+
+.thumbnail-image {
+	cursor: pointer;
+}
+
+.heading-col {
+	word-wrap: break-word;
+}
+
+.heading-col h1 {
+	font-weight: 100;
+	text-transform: uppercase;
+	letter-spacing: 1.2px;
+	margin-top: 1em;
+}
+
+.footer {
+	text-align: center;
+	padding-bottom: 1em;
+	font-size: 0.9em;
+}
+
+.related-tags h2 {
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 1.2px;
+	margin-top: 1em;
+}
+
+.related-tag {
+	padding: 0.2em;
+	line-height: 2em;
+}

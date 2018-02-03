@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	{% block meta %}{% endblock meta %} 
+	{% include 'website/styles.html' %}
+</head>
+<body>
+	{% include 'website/navigation.html' %}
+	<div class="container-fluid">
+		{% block content %}
+		{% endblock content %}
+		<hr>
+		<div class="footer">Copyright &copy; 2018 Photoblog</div>
+	</div>
+	{% include 'website/scripts.html' %}
+</body>
+</html>
