@@ -1,6 +1,9 @@
 dj-database-url==0.4.2
 Django==2.0.1
+django-ckeditor==5.4.0
+django-js-asset==1.0.0
 django-tagging==0.4.6
+django-widget-tweaks==1.4.1
 easy-thumbnails==2.5
 gunicorn==19.7.1
 Pillow==5.0.0
