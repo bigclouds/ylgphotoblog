@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'widget_tweaks',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -104,6 +105,20 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+
+# S3 Media Storage
+
+if not DEBUG:
+    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+    AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+    DEFAULT_FILE_STORAGE = 'website.storage_backends.MediaStorage'
+    THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE  # easy_thumbnails
+    MEDIAFILES_LOCATION = 'media'
+    MEDIA_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+    AWS_QUERYSTRING_AUTH = False
+
+
 # Email backend and contact form
 
 if DEBUG:
@@ -164,3 +179,8 @@ CKEDITOR_CONFIGS = {
 # Blog Config
 
 BLOG_NAME = config('BLOG_NAME', default='Photoblog')
+
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
