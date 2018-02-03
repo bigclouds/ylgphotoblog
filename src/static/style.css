@@ -163,18 +163,20 @@ body {
 
 .thumbnail {
     position: relative;
+    cursor: pointer;
 }
 
 .thumbnail-title {
     position: absolute;
     bottom: 0;
-    left: 0;
+    top: 50%;
     width: 100%;
     opacity: 0;
     color: #fff;
     font-size: 1.6em;
     letter-spacing: 1px;
     text-transform: uppercase;
+    padding: 0 1em;
 }
 
 .thumbnail:hover .thumbnail-title {
