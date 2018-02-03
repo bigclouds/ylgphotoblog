@@ -142,7 +142,7 @@ CONTACT_PAGE_DESCRIPTION = config(
 
 THUMBNAIL_ALIASES = {
     '': {
-        'gallery_thumb': {'size': (350, 350), 'crop': True},
+        'gallery_thumb': {'size': (500, 500), 'crop': True},
         'carousel': {'size': (800, 800), 'crop': False},
         'mini_thumb': {'size': (80, 80), 'crop': True},
     },
