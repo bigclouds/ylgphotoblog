@@ -60,6 +60,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'blog.context_processors.nav_processor',
+                'blog.context_processors.config_processor',
             ],
         },
     },
@@ -158,3 +159,8 @@ CKEDITOR_CONFIGS = {
     },
 
 }
+
+
+# Blog Config
+
+BLOG_NAME = config('BLOG_NAME', default='Photoblog')
