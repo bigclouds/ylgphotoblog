@@ -9,9 +9,9 @@ from decouple import config
 from .forms import ContactForm
 
 
-def send_email(from_name, from_email, to_emails, subject, message):
-    headers = {'Reply-To': from_email, 'From': from_name}
-    email = EmailMessage(subject, message, from_name, to=to_emails,
+def send_email(from_email, to_emails, subject, message):
+    headers = {'Reply-To': from_email}
+    email = EmailMessage(subject, message, to=to_emails,
                          headers=headers)
     email.send()
 
@@ -21,12 +21,11 @@ def contact_page(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             domain = get_current_site(request)
-            from_name = '{} Contact Form'.format(domain)
             from_email = form.cleaned_data['from_email']
             to_emails = [settings.CONTACT_FORM_EMAIL]
             subject = 'Message from {} contact form'.format(domain)
             message = form.cleaned_data['message']
-            send_email(from_name, from_email, to_emails, subject, message)
+            send_email(from_email, to_emails, subject, message)
             messages.success(request, 'Message sent!')
         else:
             messages.warning(request, 'There was a problem! Please try again.')
