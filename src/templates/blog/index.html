@@ -15,6 +15,15 @@
       <a class="tag" style="font-size:{{ tag_.font_size|add:8 }}px" href="{% url 'tag-view' tag=tag_ %}">{{ tag_ }}</a>
     {% endfor %}
   </div>
+  {% for page in featured_pages %}
+    <div class="col-md-3 mx-0">
+      <div class="featured-page text-center">
+        <a href="{% url 'page-view' page.slug %}"><img class="img-fluid thumbnail-image" src="{{ page.featured_image|thumbnail_url:'gallery_thumb' }}" alt="{{ page.title }}">
+        <div class="featured-page-title"><span>{{ page.title }}</span></div>
+        </a>
+      </div>
+    </div>
+  {% endfor %}
 	{% for photo in photos %}
 		<div class="col-md-3 mx-0">
       <div class="thumbnail text-center" data-toggle="modal" data-target="#exampleModal" data-slide="#slide-{{ photo.pk }}">

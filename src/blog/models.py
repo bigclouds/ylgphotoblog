@@ -32,6 +32,8 @@ class Page(models.Model):
     content = RichTextUploadingField(blank=True, null=True)
     show_in_menu = models.BooleanField(default=True)
     menu_position = models.IntegerField(default=0)
+    homepage_featured = models.BooleanField(default=False)
+    featured_image = ThumbnailerImageField(blank=True, null=True)
     seo_title = models.CharField(max_length=200, blank=True, null=True)
     seo_description = models.CharField(max_length=200, blank=True, null=True)
     seo_noindex = models.BooleanField(default=False)

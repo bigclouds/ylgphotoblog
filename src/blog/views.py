@@ -6,8 +6,9 @@ from .models import Page, Photo
 
 def index(request):
     photos = Photo.objects.all()
+    featured_pages = Page.objects.filter(homepage_featured=True)
     template = 'blog/index.html'
-    context = {'photos': photos}
+    context = {'photos': photos, 'featured_pages': featured_pages}
     return render(request, template, context)
 
 
