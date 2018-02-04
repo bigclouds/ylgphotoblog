@@ -6,8 +6,15 @@
 <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet"> 
 <link rel="stylesheet" href="{% static 'style.css' %}">
 
-{% if 'page_styles' %}
+{% if 'page_head' %}
 {% autoescape off %}
-	{{ page_styles }}
+	{{ page_head }}
 {% endautoescape %}
+{% endif %}
+
+
+{% if 'page_styles' %}
+<style>
+	{{ page_styles }}
+</style>
 {% endif %}
