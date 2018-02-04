@@ -26,7 +26,7 @@
 	{% for photo in object_list %}
 		<div class="col-md-3 mx-0">
       <div class="thumbnail text-center" data-toggle="modal" data-target="#exampleModal" data-slide="#slide-{{ photo.pk }}">
-        <img class="img-fluid thumbnail-image" src="{{ photo.image|thumbnail_url:'gallery_thumb' }}" alt="Hello, World!">
+        <img class="img-fluid thumbnail-image" src="{{ photo.image|thumbnail_url:'medium' }}" alt="Hello, World!">
         <div class="thumbnail-title">{{ photo.title }}</div>
       </div>
 		</div>

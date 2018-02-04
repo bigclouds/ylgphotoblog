@@ -1,16 +1,28 @@
 import os
 
 import dj_database_url
-
 from decouple import config
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = config('SECRET_KEY')
+# Blog config
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+BLOG_NAME = config('BLOG_NAME', default='Photoblog')
+CONTACT_FORM_EMAIL = config('CONTACT_FORM_EMAIL')
+CONTACT_PAGE_DESCRIPTION = config(
+    'CONTACT_PAGE_DESCRIPTION',
+    default='Send me a message using the form below.')
+
+
+# General config
 
 ALLOWED_HOSTS = ['*']
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEBUG = config('DEBUG', default=False, cast=bool)
+SECRET_KEY = config('SECRET_KEY')
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+# Database
 
 DATABASES = {
     'default': dj_database_url.config(
@@ -18,6 +30,21 @@ DATABASES = {
         conn_max_age=500,
     )
 }
+
+
+# Email backend
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = config('EMAIL_HOST')
+    EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+    EMAIL_PORT = 587
+
+
+# App config
 
 INSTALLED_APPS = [
     'blog.apps.BlogConfig',
@@ -119,32 +146,12 @@ if not DEBUG:
     AWS_QUERYSTRING_AUTH = False
 
 
-# Email backend and contact form
-
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-else:
-    EMAIL_USE_TLS = True
-    EMAIL_HOST = config('EMAIL_HOST')
-    EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-    EMAIL_PORT = 587
-
-# Contact Form
-
-CONTACT_FORM_EMAIL = config('CONTACT_FORM_EMAIL')
-CONTACT_PAGE_DESCRIPTION = config(
-    'CONTACT_PAGE_DESCRIPTION',
-    default='Send me a message using the form below.')
-
-
 # Thumbnails
 
 THUMBNAIL_ALIASES = {
     '': {
-        'gallery_thumb': {'size': (500, 500), 'crop': True},
+        'medium': {'size': (500, 500), 'crop': True},
         'carousel': {'size': (800, 800), 'crop': False},
-        'mini_thumb': {'size': (80, 80), 'crop': True},
     },
 }
 
@@ -174,13 +181,3 @@ CKEDITOR_CONFIGS = {
     },
 
 }
-
-
-# Blog Config
-
-BLOG_NAME = config('BLOG_NAME', default='Photoblog')
-
-
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
