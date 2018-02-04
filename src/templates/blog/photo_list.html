@@ -10,7 +10,7 @@
 {% block content %}
 <div class="row no-gutters">
   <div class="col-md-3 py-4 px-4 text-center align-self-center">
-    {% tag_cloud_for_model blog.photo as tag_cloud %}
+    {% tag_cloud_for_model blog.photo as tag_cloud with steps=8 min_count=1 distribution=log %}
     {% for tag_ in tag_cloud %}
       <a class="tag {% if tag_ == tag %}active{% endif %}" style="font-size:{{ tag_.count|add:9 }}px" href="{% url 'tag-view' tag=tag_ %}">{{ tag_ }} <!-- ({{ tag.count }}) --></a>
     {% endfor %}
