@@ -197,7 +197,7 @@ body {
     background-color: rgba(0,0,0,0.5);
     color: #fff;
     font-weight: 400;
-    font-family: 'sans-serif';
+    font-family: 'Ubuntu Condensed', sans-serif;
 }
 
 .tag:hover {
