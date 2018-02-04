@@ -3,7 +3,7 @@
 body {
 	font-family: 'Lato', sans-serif;
 	font-weight: 300;
-	margin-top: 75px; /* because fixed navbar */
+	margin-top: 55px; /* because fixed navbar */
 }
 
 .container {
@@ -216,6 +216,14 @@ body {
 .page-content img {
     max-width: 100%;
     height: auto;
+}
+
+.page-lead {
+    font-family: 'Amatic SC',  cursive;
+    font-size: 3em;
+    text-align: center;
+    word-wrap: break-word;
+    margin-top: 0.2em;
 }
 
 /* Footer */
