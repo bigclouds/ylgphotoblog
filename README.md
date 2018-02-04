@@ -1,24 +1,25 @@
 # Django Photoblog
-Photoblog app written in Django and optimized for Heroku deployment. Uses Whitesnoise to serve static assets and Amazon S3 for user uploads.
+Photoblog app written in Django. Features photo tagging and simple CMS for creating pages with WYSIWYG editor. Ready for Heroku deployment. Uses Whitesnoise to serve static assets and Amazon S3 for photo uploads.
 
 ## Requirements
 - Python 3 (recommended 3.6.4)
 - Django 2
-- python-decouple (config variables)
-- dj-database-url (database config)
-- gunicorn (production server)
-- psycopg2 (PostreSQL in production)
-- whitenoise (static files in production)
-- django-storages (media files in production)
-
+- django-tagging
+- django-ckeditor
+- django-widget-tweaks
+- python-decouple
+- dj-database-url
+- gunicorn (production)
+- psycopg2 (production)
+- whitenoise (production)
+- django-storages (production)
 
 ## Features
 
 ## Running project in development
 
-
-### Config Variables
-Create `.env` file in `src` directory and specify config variables, e.g.:
+### Config variables
+Create `.env` file in `src` directory and specify your development settings, e.g.:
 ```
 SECRET_KEY=6b)c7q3g9+vxwnn3e7*m@%2=r3x6yub6stj4e9jv#4p=eita-#
 DEBUG=True
