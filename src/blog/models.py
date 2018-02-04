@@ -37,8 +37,8 @@ class Page(models.Model):
     seo_title = models.CharField(max_length=200, blank=True, null=True)
     seo_description = models.CharField(max_length=200, blank=True, null=True)
     seo_noindex = models.BooleanField(default=False)
-    custom_styles = models.TextField(blank=True, null=True)
-    custom_scripts = models.TextField(blank=True, null=True)
+    page_styles = models.TextField(blank=True, null=True)
+    page_scripts = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.title

@@ -49,5 +49,8 @@ class PageView(DetailView):
                                                      settings.BLOG_NAME)
         if page.seo_description:
             context['page_description'] = page.seo_description
-
+        if page.page_styles:
+            context['page_styles'] = page.page_styles
+        if page.page_scripts:
+            context['page_scripts'] = page.page_scripts
         return context

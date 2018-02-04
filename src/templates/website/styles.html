@@ -5,3 +5,9 @@
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet"> 
 <link rel="stylesheet" href="{% static 'style.css' %}">
+
+{% if 'page_styles' %}
+{% autoescape off %}
+	{{ page_styles }}
+{% endautoescape %}
+{% endif %}
