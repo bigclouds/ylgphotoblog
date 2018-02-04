@@ -7,10 +7,12 @@ from decouple import config
 # Blog config
 
 BLOG_NAME = config('BLOG_NAME', default='Photoblog')
+BLOG_DESCRIPTION = config('BLOG_DESCRIPTION', default=None)
 CONTACT_FORM_EMAIL = config('CONTACT_FORM_EMAIL')
 CONTACT_PAGE_DESCRIPTION = config(
     'CONTACT_PAGE_DESCRIPTION',
     default='Send me a message using the form below.')
+SEO_NOINDEX = config('SEO_NOINDEX', default=False)
 
 
 # General config

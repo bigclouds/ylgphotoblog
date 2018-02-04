@@ -2,8 +2,8 @@
 {% load thumbnail %}
 
 {% block meta %}
-<title>{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }} - {{ config.BLOG_NAME }}{% endif %}</title>
-{% if page.seo_description %}<meta name="description" content="{{ page.seo_description }}"/>{% endif %}
+<title>{{ page_title }}</title>
+{% if page_description %}<meta name="description" content="{{ page_description }}"/>{% endif %}
 {% if page.seo_noindex %}<meta name="robots" content="noindex">{% endif %}
 {% endblock meta %} 
 

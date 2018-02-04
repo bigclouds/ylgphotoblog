@@ -3,8 +3,8 @@
 {% load tagging_tags %}
 
 {% block meta %}
-<title>#{{ tag }} photos - {{ config.BLOG_NAME }}</title>
-<meta name="description" content=""/>
+<title>{{ page_title }}</title>
+{% if page_description %}<meta name="description" content="{{ page_description }}"/>{% endif %}
 {% endblock meta %} 
 
 {% block content %}
@@ -15,6 +15,8 @@
       <a class="tag {% if tag_ == tag %}active{% endif %}" style="font-size:{{ tag_.font_size|add:8 }}px" href="{% url 'tag-view' tag=tag_ %}">{{ tag_ }}</a>
     {% endfor %}
   </div>
+
+  {% if view == 'tag-view' %}
   <div class="col-md-3 py-4 px-4 text-center heading-col">
     <h1>{{ tag }}</h1>
     <hr>
@@ -23,7 +25,21 @@
        <a href="{% url 'admin:tagging_tag_change' tag.pk %}" target="_blank">Edit tag</a>
     {% endif %}
   </div>
-	{% for photo in object_list %}
+  {% endif %}
+
+  {% if view == 'homepage-view' %}
+  {% for page in featured_pages %}
+    <div class="col-md-3 mx-0">
+      <div class="featured-page text-center">
+        <a href="{% url 'page-view' page.slug %}"><img class="img-fluid thumbnail-image" src="{{ page.featured_image|thumbnail_url:'medium' }}" alt="{{ page.title }}">
+        <div class="featured-page-title"><span>{{ page.title }}</span></div>
+        </a>
+      </div>
+    </div>
+  {% endfor %} 
+  {% endif %}
+
+	{% for photo in photos %}
 		<div class="col-md-3 mx-0">
       <div class="thumbnail text-center" data-toggle="modal" data-target="#exampleModal" data-slide="#slide-{{ photo.pk }}">
         <img class="img-fluid thumbnail-image" src="{{ photo.image|thumbnail_url:'medium' }}" alt="Hello, World!">
@@ -31,6 +47,8 @@
       </div>
 		</div>
 	{% endfor %}
+  
+  {% if view == 'tag-view' %}
   {% if related_tags %}
   <div class="col-md-3 py-4 px-4 text-center align-self-center related-tags">
     <h2>See also</h5>
@@ -40,6 +58,8 @@
     {% endfor %}
   </div>
   {% endif %}
+  {% endif %}
+
   <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
@@ -51,7 +71,7 @@
               <div class="col-md-8 photo-image">
                 <div id="carouselExampleControls" class="carousel" data-interval="false">
                   <div class="carousel-inner">
-                    {% for photo in object_list %}
+                    {% for photo in photos %}
                     <div id="slide-{{ photo.pk }}" class="carousel-item" data-pk="{{ photo.pk }}" data-title="{{ photo.title }}" data-description="{{ photo.description }}" data-tags="{{ photo.tags }}" data-date="{{ photo.date }}">
                       <img class="img-fluid" src="{{ photo.image|thumbnail_url:'carousel' }}" alt="{{ photo.title }}">
                     </div>
@@ -91,6 +111,4 @@
     </div>
   </div>
 </div>
-
-
 {% endblock content %}

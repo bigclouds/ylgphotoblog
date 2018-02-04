@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	{% block meta %}{% endblock meta %} 
+	{% block meta %}{% endblock meta %}
+	{% if config.SEO_NOINDEX == True %}<meta name="robots" content="noindex">{% endif %}
 	{% include 'website/styles.html' %}
 </head>
 <body>

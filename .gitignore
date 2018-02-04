@@ -100,8 +100,11 @@ ENV/
 # mypy
 .mypy_cache/
 
-# Project specific
+# Sublime Text
 *.sublime-*
+
+# Project specific
 static-root
 media
 *.sqlite3
+.fuse_*
