@@ -9,6 +9,7 @@
 
 {% block content %}
 <div class="row no-gutters">
+
   <div class="col-md-3 py-4 px-4 text-center align-self-center">
     {% tag_cloud_for_model blog.photo as tag_cloud with steps=9 min_count=2 distribution=linear %}
     {% for tag_ in tag_cloud %}
@@ -41,7 +42,7 @@
 
 	{% for photo in photos %}
 		<div class="col-md-3 mx-0">
-      <div class="thumbnail text-center" data-toggle="modal" data-target="#exampleModal" data-slide="#slide-{{ photo.pk }}">
+      <div class="thumbnail text-center" data-toggle="modal" data-target="#modal" data-slide="#slide-{{ photo.pk }}">
         <img class="img-fluid thumbnail-image" src="{{ photo.image|thumbnail_url:'medium' }}" alt="Hello, World!">
         <div class="thumbnail-title">{{ photo.title }}</div>
       </div>
@@ -54,13 +55,13 @@
     <h2>See also</h5>
     <hr>
     {% for t in related_tags %}
-      <a class="related-tag" href="{% url 'tag-view' tag=t %}">#{{ t }} <!-- ({{ tag.count }}) --></a>
+      <a class="related-tag" href="{% url 'tag-view' tag=t %}">#{{ t }}</a>
     {% endfor %}
   </div>
   {% endif %}
   {% endif %}
 
-  <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -69,7 +70,7 @@
         <div class="modal-body">
             <div class="row">
               <div class="col-md-8 photo-image">
-                <div id="carouselExampleControls" class="carousel" data-interval="false">
+                <div id="carouselControls" class="carousel" data-interval="false">
                   <div class="carousel-inner">
                     {% for photo in photos %}
                     <div id="slide-{{ photo.pk }}" class="carousel-item" data-pk="{{ photo.pk }}" data-title="{{ photo.title }}" data-description="{{ photo.description }}" data-tags="{{ photo.tags }}" data-date="{{ photo.date }}">
@@ -77,11 +78,11 @@
                     </div>
                     {% endfor %}
                   </div>
-                  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                  <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                   </a>
-                  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                  <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                   </a>
