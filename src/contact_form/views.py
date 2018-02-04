@@ -10,7 +10,7 @@ from .forms import ContactForm
 
 
 def send_email(from_email, to_emails, subject, message):
-    headers = {'Reply-To': from_email}
+    headers = {'Reply-To': from_email, 'From': 'contact form'}
     email = EmailMessage(subject, message, to=to_emails,
                          headers=headers)
     email.send()
@@ -23,7 +23,7 @@ def contact_page(request):
             domain = get_current_site(request)
             from_email = form.cleaned_data['from_email']
             to_emails = [settings.CONTACT_FORM_EMAIL]
-            subject = 'Message from {} contact form'.format(domain)
+            subject = '{} contact form'.format(domain)
             message = form.cleaned_data['message']
             send_email(from_email, to_emails, subject, message)
             messages.success(request, 'Message sent!')
