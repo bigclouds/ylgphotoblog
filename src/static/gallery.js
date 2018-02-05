@@ -4,6 +4,7 @@ $('#modal').on('show.bs.modal', function (event) {
   var slide = modal.find(button.data('slide'));
   var title = slide.data('title');
   var description = slide.data('description');
+  var image_url = slide.data('image');
   var tags = slide.data('tags');
   var date = slide.data('date');
   var pk = slide.data('pk');
@@ -13,6 +14,8 @@ $('#modal').on('show.bs.modal', function (event) {
   ($('.photo-date')).text(date);
   ($('.edit-link')).attr('href', '/admin/blog/photo/' + pk + '/change/')
   slide.addClass('active');
+  slide.find('.carousel-image').attr('src', image_url);
+  slide.find('.carousel-image').attr('alt', title);
 })
 
 $('#modal').on('hide.bs.modal', function (event) {
@@ -27,6 +30,7 @@ $('#carouselControls').on('slide.bs.carousel', function (event) {
   var relatedTarget = $(event.relatedTarget);
   var title = relatedTarget.data('title');
   var description = relatedTarget.data('description');
+  var image_url = relatedTarget.data('image');
   var tags = relatedTarget.data('tags');
   var date = relatedTarget.data('date');
   var pk = relatedTarget.data('pk');
@@ -34,5 +38,7 @@ $('#carouselControls').on('slide.bs.carousel', function (event) {
   ($('.photo-description')).text(description);
   ($('.photo-tags')).text(tags);
   ($('.photo-date')).text(date);
-  ($('.edit-link')).attr('href', '/admin/blog/photo/' + pk + '/change/')
+  ($('.edit-link')).attr('href', '/admin/blog/photo/' + pk + '/change/');
+  relatedTarget.find('.carousel-image').attr('src', image_url);
+  relatedTarget.find('.carousel-image').attr('alt', title);
 })

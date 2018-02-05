@@ -1,4 +1,5 @@
 {% extends 'website/base.html' %}
+{% load static %}
 {% load thumbnail %}
 {% load tagging_tags %}
 
@@ -8,12 +9,14 @@
 {% endblock meta %} 
 
 {% block content %}
-<div class="row no-gutters gallery">
+<div class="row no-gutters gallery infinite-container">
   <div class="col-md-3 align-self-center tag-cloud">
-    {% tag_cloud_for_model blog.photo as tag_cloud with steps=9 min_count=2 distribution=linear %}
-    {% for tag_ in tag_cloud %}
-      <a class="tag {% if tag_ == tag %}active{% endif %}" style="font-size:{{ tag_.font_size|add:8 }}px" href="{% url 'tag-view' tag=tag_ %}">{{ tag_ }}</a>
-    {% endfor %}
+    <div class="tag-cloud-container">
+      {% tag_cloud_for_model blog.photo as tag_cloud with steps=9 min_count=2 distribution=linear %}
+      {% for tag_ in tag_cloud %}
+        <a class="tag {% if tag_ == tag %}active{% endif %}" style="font-size:{{ tag_.font_size|add:8 }}px" href="{% url 'tag-view' tag=tag_ %}">{{ tag_ }}</a>
+      {% endfor %}
+    </div>
   </div>
 
   {% if view == 'tag-view' %}
@@ -29,7 +32,7 @@
 
   {% if view == 'homepage-view' %}
   {% for page in featured_pages %}
-    <div class="col-md-3 featured-page thumbnail-col featured-col">
+    <div class="col-md-3 thumbnail-col featured-col">
         <a href="{% url 'page-view' page.slug %}"><img class="img-fluid" src="{{ page.featured_image|thumbnail_url:'medium' }}" alt="{{ page.title }}">
         <div class="featured-title"><span>{{ page.title }}</span></div>
         </a>
@@ -37,14 +40,14 @@
   {% endfor %} 
   {% endif %}
 
-	{% for photo in photos %}
-		<div class="col-md-3 thumbnail-col">
+  {% for photo in photos.all %}
+    <div class="col-md-3 thumbnail-col infinite-item">
       <div data-toggle="modal" data-target="#modal" data-slide="#slide-{{ photo.pk }}">
         <img class="img-fluid thumbnail-image" src="{{ photo.image|thumbnail_url:'medium' }}" alt="Hello, World!">
         <div class="thumbnail-title">{{ photo.title }}</div>
       </div>
-		</div>
-	{% endfor %}
+    </div>
+  {% endfor %}
   
   {% if view == 'tag-view' %}
   {% if related_tags %}
@@ -57,61 +60,73 @@
   </div>
   {% endif %}
   {% endif %}
+</div>
 
-  <div class="modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-            <div class="row">
-              <div class="col-md-8">
-                <div id="carouselControls" class="carousel" data-interval="false">
-                  <div class="carousel-inner">
-                    {% for photo in photos %}
-                    <div id="slide-{{ photo.pk }}" class="carousel-item" data-pk="{{ photo.pk }}" data-title="{{ photo.title }}" data-description="{{ photo.description }}" data-tags="{{ photo.tags }}" data-date="{{ photo.date }}">
-                      <img class="carousel-image img-fluid" src="{{ photo.image|thumbnail_url:'carousel' }}" alt="{{ photo.title }}">
-                    </div>
-                    {% endfor %}
+<div class="loading" style="display: none;">
+  <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="64px" height="64px" viewBox="0 0 128 128" xml:space="preserve"><path fill="#000" d="M111.708,49A50.116,50.116,0,0,0,79,16.292V1.785A64.076,64.076,0,0,1,126.215,49H111.708ZM49,16.292A50.114,50.114,0,0,0,16.292,49H1.785A64.075,64.075,0,0,1,49,1.785V16.292ZM16.292,79A50.116,50.116,0,0,0,49,111.708v14.507A64.076,64.076,0,0,1,1.785,79H16.292ZM79,111.708A50.118,50.118,0,0,0,111.708,79h14.507A64.078,64.078,0,0,1,79,126.215V111.708Z"><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="-90 64 64" dur="600ms" repeatCount="indefinite"></animateTransform></path>
+  <path fill="#000" d="M96.971,53.633a34.634,34.634,0,0,0-22.6-22.6V21A44.283,44.283,0,0,1,107,53.633H96.971Zm-43.338-22.6a34.634,34.634,0,0,0-22.6,22.6H21A44.283,44.283,0,0,1,53.633,21V31.029Zm-22.6,43.338a34.634,34.634,0,0,0,22.6,22.6V107A44.283,44.283,0,0,1,21,74.367H31.029Zm43.338,22.6a34.634,34.634,0,0,0,22.6-22.6H107A44.283,44.283,0,0,1,74.367,107V96.971Z"><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="90 64 64" dur="600ms" repeatCount="indefinite"></animateTransform></path>
+  <path fill="#000" d="M85.47,57.25A22.552,22.552,0,0,0,70.75,42.53V36A28.836,28.836,0,0,1,92,57.25H85.47ZM57.25,42.53A22.552,22.552,0,0,0,42.53,57.25H36A28.836,28.836,0,0,1,57.25,36V42.53ZM42.53,70.75A22.552,22.552,0,0,0,57.25,85.47V92A28.836,28.836,0,0,1,36,70.75H42.53ZM70.75,85.47A22.552,22.552,0,0,0,85.47,70.75H92A28.836,28.836,0,0,1,70.75,92V85.47Z"><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="-90 64 64" dur="600ms" repeatCount="indefinite"></animateTransform></path></svg>
+</div>
+
+{% if page_obj.has_next %}
+  <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">More</a>
+{% endif %}
+
+<!-- Start Modal -->
+<div class="modal gallery-modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <div class="row">
+            <div class="col-md-8">
+              <div id="carouselControls" class="carousel" data-interval="false">
+                <div class="carousel-inner">
+                  {% for photo in all_photos %}
+                  <div id="slide-{{ photo.pk }}" class="carousel-item"  data-image="{{ photo.image|thumbnail_url:'carousel' }}" data-pk="{{ photo.pk }}" data-title="{{ photo.title }}" data-description="{{ photo.description }}" data-tags="{{ photo.tags }}" data-date="{{ photo.date }}">
+                    <img class="carousel-image img-fluid" src="" alt="">
                   </div>
-                  <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
+                  {% endfor %}
                 </div>
+                <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
               </div>
-              <div class="col-md-4 photo-info">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <h2 class="photo-title"></h2>
-                      <p><span class="photo-date"></span></p>
-                      <p><span class="photo-tags"></span></p>
-                      <p class="photo-description"></p>
-                      {% if request.user.is_superuser %}
-                        <a class="edit-link" href="" target="_blank">Edit photo</a>
-                      {% endif %}
-                    </div>
-                    <div class="col-md-12">
-                      <div class="social-icons">
-                        <i class="fab fa-facebook"></i>
-                        <i class="fab fa-instagram"></i>
-                        <i class="fab fa-pinterest"></i>
-                        <i class="fab fa-google-plus"></i>
-                      </div>
+            </div>
+            <div class="col-md-4 photo-info">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h2 class="photo-title"></h2>
+                    <p><span class="photo-date"></span></p>
+                    <p><span class="photo-tags"></span></p>
+                    <p class="photo-description"></p>
+                    {% if request.user.is_superuser %}
+                      <a class="edit-link" href="" target="_blank">Edit photo</a>
+                    {% endif %}
+                  </div>
+                  <div class="col-md-12">
+                    <div class="social-icons">
+                      <i class="fab fa-facebook"></i>
+                      <i class="fab fa-instagram"></i>
+                      <i class="fab fa-pinterest"></i>
+                      <i class="fab fa-google-plus"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-        </div>
+          </div>
       </div>
     </div>
   </div>
 </div>
+<!-- End Modal -->
 {% endblock content %}

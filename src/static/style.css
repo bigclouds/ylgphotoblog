@@ -106,14 +106,21 @@ body {
 /* Gallery: Tag Cloud */
 
 .gallery .tag-cloud {
-    padding: 2.5em;
-    text-align: center;
+    display:block;
+    float:left;
+    overflow:hidden;
+    padding:1em 2em;
+}
+
+.gallery .tag-cloud-container {
+    text-align:center;
+    position: relative;
 }
 
 .gallery .tag-cloud .tag {
     border: 1px solid #333;
-    margin: 0.4em;
-    padding: 0.3em;
+    margin: -1px;
+    padding: 3px;
     background-color: rgba(0,0,0,0.5);
     color: #fff;
     font-weight: 400;
@@ -133,45 +140,45 @@ body {
 
 /* Gallery: Modal Window */
 
-.gallery .modal {
+.gallery-modal {
     text-align: center;
     width: 100%;
     background-color:rgba(0,0,0,0.5);
 }
 
-.gallery .modal-lg {
+.gallery-modal .modal-lg {
     max-width: 1200px;
 }
 
-.gallery .modal-dialog {
+.gallery-modal .modal-dialog {
     width: 100%;
 }
 
-.gallery .modal-body {
+.gallery-modal .modal-body {
     padding: 0;
     background-color:  #fdf2e9;
 }
 
-.gallery .modal-content {
+.gallery-modal .modal-content {
     border-radius: 0;
     border: none;
 }
 
-.gallery .modal-header, .modal-footer {
+.gallery-modal .modal-header, .modal-footer {
     border: none;
 }
 
-.gallery .modal .photo-info {
+.gallery-modal .photo-info {
     text-align: left;
     font-size: 0.8em;
     padding: 2.5em 4em 2em 1em;
 }
 
-.gallery .modal .photo-info .photo-date {
+.gallery-modal .photo-info .photo-date {
     font-size: 0.7em;
 }
 
-.gallery .modal .photo-info .photo-title {
+.gallery-modal .photo-info .photo-title {
     font-size: 1.2em;
     font-weight: 700;
     border-bottom: 1px solid rgba(0,0,0,.1);
@@ -179,19 +186,19 @@ body {
     margin-bottom: 0;
 }
 
-.gallery .modal .photo-info .photo-tags {
+.gallery-modal .photo-info .photo-tags {
     text-transform: uppercase;
     font-size: 0.8em;
     letter-spacing: 1.2px;
 }
 
-.gallery .modal .photo-info .photo-description {
+.gallery-modal .photo-info .photo-description {
     font-style: italic;
     font-size: 1.5em;
     letter-spacing: 1.2px;
 }
 
-.gallery .modal .photo-info .social-icons {
+.gallery-modal .photo-info .social-icons {
     border-top: 1px solid rgba(0,0,0,.1);
     font-size: 2em;
     margin-top: 2.5em;
@@ -200,23 +207,23 @@ body {
 
 /* Gallery: Carousel */
 
-.gallery .carousel .carousel-image  {
+.gallery-modal .carousel .carousel-image  {
     max-height: calc(100vh - 75px);
 }
 
-.gallery .carousel .carousel-control-prev {
+.gallery-modal .carousel .carousel-control-prev {
     width: 3em;
 }
 
-.gallery .carousel .carousel-control-next {
+.gallery-modal .carousel .carousel-control-next {
     width: 3em;
 }
 
-.gallery .carousel .carousel-control-prev-icon {
+.gallery-modal .carousel .carousel-control-prev-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' stroke='%23000' stroke-width='0.4' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
 }
 
-.gallery .carousel .carousel-control-next-icon {
+.gallery-modal .carousel .carousel-control-next-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' stroke='%23000' stroke-width='0.4' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
 }
 
