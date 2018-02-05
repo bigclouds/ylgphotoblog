@@ -8,8 +8,8 @@
 {% endblock meta %} 
 
 {% block content %}
-<div class="row no-gutters">
-  <div class="col-md-3 py-4 px-4 text-center align-self-center">
+<div class="row no-gutters gallery">
+  <div class="col-md-3 align-self-center tag-cloud">
     {% tag_cloud_for_model blog.photo as tag_cloud with steps=9 min_count=2 distribution=linear %}
     {% for tag_ in tag_cloud %}
       <a class="tag {% if tag_ == tag %}active{% endif %}" style="font-size:{{ tag_.font_size|add:8 }}px" href="{% url 'tag-view' tag=tag_ %}">{{ tag_ }}</a>
@@ -17,10 +17,10 @@
   </div>
 
   {% if view == 'tag-view' %}
-  <div class="col-md-3 py-4 px-4 text-center heading-col">
+  <div class="col-md-3 heading-col">
     <h1>{{ tag }}</h1>
     <hr>
-    <p class="tag-description">Pictures tagged with #{{ tag }}</p>
+    <p>Pictures tagged with #{{ tag }}</p>
     {% if request.user.is_superuser %}
        <a href="{% url 'admin:tagging_tag_change' tag.pk %}" target="_blank">Edit tag</a>
     {% endif %}
@@ -29,19 +29,17 @@
 
   {% if view == 'homepage-view' %}
   {% for page in featured_pages %}
-    <div class="col-md-3 mx-0">
-      <div class="featured-page text-center">
-        <a href="{% url 'page-view' page.slug %}"><img class="img-fluid thumbnail-image" src="{{ page.featured_image|thumbnail_url:'medium' }}" alt="{{ page.title }}">
-        <div class="featured-page-title"><span>{{ page.title }}</span></div>
+    <div class="col-md-3 featured-page thumbnail-col featured-col">
+        <a href="{% url 'page-view' page.slug %}"><img class="img-fluid" src="{{ page.featured_image|thumbnail_url:'medium' }}" alt="{{ page.title }}">
+        <div class="featured-title"><span>{{ page.title }}</span></div>
         </a>
-      </div>
     </div>
   {% endfor %} 
   {% endif %}
 
 	{% for photo in photos %}
-		<div class="col-md-3 mx-0">
-      <div class="thumbnail text-center" data-toggle="modal" data-target="#modal" data-slide="#slide-{{ photo.pk }}">
+		<div class="col-md-3 thumbnail-col">
+      <div data-toggle="modal" data-target="#modal" data-slide="#slide-{{ photo.pk }}">
         <img class="img-fluid thumbnail-image" src="{{ photo.image|thumbnail_url:'medium' }}" alt="Hello, World!">
         <div class="thumbnail-title">{{ photo.title }}</div>
       </div>
@@ -50,11 +48,11 @@
   
   {% if view == 'tag-view' %}
   {% if related_tags %}
-  <div class="col-md-3 py-4 px-4 text-center align-self-center related-tags">
+  <div class="col-md-3 align-self-center related-tags-col">
     <h2>See also</h5>
     <hr>
     {% for t in related_tags %}
-      <a class="related-tag" href="{% url 'tag-view' tag=t %}">#{{ t }}</a>
+      <a href="{% url 'tag-view' tag=t %}">#{{ t }}</a>
     {% endfor %}
   </div>
   {% endif %}
@@ -68,12 +66,12 @@
       <div class="modal-content">
         <div class="modal-body">
             <div class="row">
-              <div class="col-md-8 photo-image">
+              <div class="col-md-8">
                 <div id="carouselControls" class="carousel" data-interval="false">
                   <div class="carousel-inner">
                     {% for photo in photos %}
                     <div id="slide-{{ photo.pk }}" class="carousel-item" data-pk="{{ photo.pk }}" data-title="{{ photo.title }}" data-description="{{ photo.description }}" data-tags="{{ photo.tags }}" data-date="{{ photo.date }}">
-                      <img class="img-fluid" src="{{ photo.image|thumbnail_url:'carousel' }}" alt="{{ photo.title }}">
+                      <img class="carousel-image img-fluid" src="{{ photo.image|thumbnail_url:'carousel' }}" alt="{{ photo.title }}">
                     </div>
                     {% endfor %}
                   </div>
@@ -89,20 +87,25 @@
               </div>
               <div class="col-md-4 photo-info">
                 <div class="container">
-                <h2 class="photo-title"></h2>
-                <p><span class="photo-date"></span></p>
-                <p><span class="photo-tags"></span></p>
-                <p class="photo-description"></p>
-                {% if request.user.is_superuser %}
-                  <a class="edit-link" href="" target="_blank">Edit photo</a>
-                {% endif %}
-                <hr class="mt-5">
-                <div class="social-icons">
-                  <i class="fab fa-facebook"></i>
-                  <i class="fab fa-instagram"></i>
-                  <i class="fab fa-pinterest"></i>
-                  <i class="fab fa-google-plus"></i>
-                </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2 class="photo-title"></h2>
+                      <p><span class="photo-date"></span></p>
+                      <p><span class="photo-tags"></span></p>
+                      <p class="photo-description"></p>
+                      {% if request.user.is_superuser %}
+                        <a class="edit-link" href="" target="_blank">Edit photo</a>
+                      {% endif %}
+                    </div>
+                    <div class="col-md-12">
+                      <div class="social-icons">
+                        <i class="fab fa-facebook"></i>
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-pinterest"></i>
+                        <i class="fab fa-google-plus"></i>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
