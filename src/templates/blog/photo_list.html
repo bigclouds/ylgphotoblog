@@ -20,7 +20,7 @@
   </div>
 
   {% if view == 'tag-view' %}
-  <div class="col-md-3 heading-col">
+  <div class="col-md-3 heading-col align-self-center">
     <h1>{{ tag }}</h1>
     <hr>
     <p>Pictures tagged with #{{ tag }}</p>
@@ -54,9 +54,9 @@
   <div class="col-md-3 align-self-center related-tags-col">
     <h2>See also</h5>
     <hr>
-    {% for t in related_tags %}
-      <a href="{% url 'tag-view' tag=t %}">#{{ t }}</a>
-    {% endfor %}
+      {% for t in related_tags %}
+        <a href="{% url 'tag-view' tag=t %}">#{{ t }}</a>
+      {% endfor %}
   </div>
   {% endif %}
   {% endif %}
@@ -101,9 +101,9 @@
               </div>
             </div>
             <div class="col-md-4 photo-info">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-12">
+              <div class="container h-100">
+                <div class="row h-100">
+                  <div class="col-12 h-75">
                     <h2 class="photo-title"></h2>
                     <p><span class="photo-date"></span></p>
                     <p><span class="photo-tags"></span></p>
@@ -112,21 +112,23 @@
                       <a class="edit-link" href="" target="_blank">Edit photo</a>
                     {% endif %}
                   </div>
-                  <div class="col-md-12">
+                  <div class="col-12">
                     <div class="social-icons">
                       <i class="fab fa-facebook"></i>
                       <i class="fab fa-instagram"></i>
                       <i class="fab fa-pinterest"></i>
                       <i class="fab fa-google-plus"></i>
                     </div>
+                </div>
+                <div class="row align-items-end h-100">
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          </div>
       </div>
     </div>
   </div>
-</div>
 <!-- End Modal -->
 {% endblock content %}
