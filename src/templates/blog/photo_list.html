@@ -51,8 +51,8 @@
   <div class="col-md-3 align-self-center related-tags-col">
     <h2>See also</h5>
     <hr>
-      {% for t in related_tags %}
-        <a href="{% url 'tag-view' tag=t %}">#{{ t }}</a>
+      {% for related_tag in related_tags %}
+        <a href="{% url 'tag-view' tag=related_tag %}">#{{ related_tag }}</a>
       {% endfor %}
   </div>
   {% endif %}

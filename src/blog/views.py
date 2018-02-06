@@ -26,6 +26,22 @@ def generate_tag_cloud():
     return cloud
 
 
+def generate_related_tags(tag):
+    tags = Tag.objects.related_for_model(
+        tag,
+        Photo,
+        counts=True,
+        min_count=None)
+    limit = settings.RELATED_TAGS_LIMIT
+    if len(tags) > limit:
+        while len(tags) > limit:
+            min_value = min(tag.count for tag in tags)
+            min_tag = [tag for tag in tags if tag.count == min_value][0]
+            # print('removing {} - {} counts'.format(min_tag, min_tag.count))
+            tags.remove(min_tag)
+    return tags
+
+
 class HomepageView(ListView):
     model = Photo
     context_object_name = 'photos'
@@ -48,7 +64,6 @@ class TagView(TaggedObjectList):
     context_object_name = 'photos'
     paginate_by = 10
     allow_empty = True
-    related_tags = True
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -58,6 +73,7 @@ class TagView(TaggedObjectList):
         context['all_photos'] = Photo.objects.all()
         context['page_description'] = 'Photos tagged with #{}'.format(self.tag)
         context['tag_cloud'] = generate_tag_cloud()
+        context['related_tags'] = generate_related_tags(self.tag)
         return context
 
 

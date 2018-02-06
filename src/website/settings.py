@@ -13,6 +13,7 @@ CONTACT_PAGE_DESCRIPTION = config(
     'CONTACT_PAGE_DESCRIPTION',
     default='Send me a message using the form below.')
 TAG_CLOUD_LIMIT = config('TAG_CLOUD_LIMIT', default=10, cast=int)
+RELATED_TAGS_LIMIT = config('RELATED_TAGS_LIMIT', default=5, cast=int)
 SEO_NOINDEX = config('SEO_NOINDEX', default=False)
 
 
