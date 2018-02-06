@@ -106,15 +106,8 @@ body {
 /* Gallery: Tag Cloud */
 
 .gallery .tag-cloud {
-    display:block;
-    float:left;
-    overflow:hidden;
     padding:1em 2em;
-}
-
-.gallery .tag-cloud-container {
     text-align:center;
-    position: relative;
 }
 
 .gallery .tag-cloud .tag {

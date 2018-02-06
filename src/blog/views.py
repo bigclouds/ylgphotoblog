@@ -1,9 +1,29 @@
 from django.conf import settings
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+
+from tagging.models import Tag
+from tagging.utils import LOGARITHMIC
 from tagging.views import TaggedObjectList
 
 from .models import Page, Photo
+
+
+def generate_tag_cloud():
+    cloud = Tag.objects.cloud_for_model(
+        Photo,
+        steps=9,
+        distribution=LOGARITHMIC,
+        filters=None,
+        min_count=None)
+    limit = settings.TAG_CLOUD_LIMIT
+    if len(cloud) > limit:
+        while len(cloud) > limit:
+            min_value = min(tag.count for tag in cloud)
+            min_tag = [tag for tag in cloud if tag.count == min_value][0]
+            # print('removing {} - {} counts'.format(min_tag, min_tag.count))
+            cloud.remove(min_tag)
+    return cloud
 
 
 class HomepageView(ListView):
@@ -19,6 +39,7 @@ class HomepageView(ListView):
         context['all_photos'] = Photo.objects.all()
         if settings.BLOG_DESCRIPTION:
             context['page_description'] = settings.BLOG_DESCRIPTION
+        context['tag_cloud'] = generate_tag_cloud()
         return context
 
 
@@ -36,6 +57,7 @@ class TagView(TaggedObjectList):
                                                          settings.BLOG_NAME)
         context['all_photos'] = Photo.objects.all()
         context['page_description'] = 'Photos tagged with #{}'.format(self.tag)
+        context['tag_cloud'] = generate_tag_cloud()
         return context
 
 
