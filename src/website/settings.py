@@ -14,7 +14,9 @@ CONTACT_PAGE_DESCRIPTION = config(
     default='Send me a message using the form below.')
 TAG_CLOUD_LIMIT = config('TAG_CLOUD_LIMIT', default=10, cast=int)
 RELATED_TAGS_LIMIT = config('RELATED_TAGS_LIMIT', default=5, cast=int)
-SEO_NOINDEX = config('SEO_NOINDEX', default=False)
+SEO_BLOG_TITLE = config('SEO_BLOG_TITLE', default=None)
+SEO_BLOG_DESCRIPTION = config('SEO_BLOG_DESCRIPTION', default=None)
+SEO_NOINDEX = config('SEO_NOINDEX', default=False, cast=bool)
 
 
 # General config

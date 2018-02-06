@@ -50,11 +50,16 @@ class HomepageView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['view'] = 'homepage-view'
-        context['page_title'] = settings.BLOG_NAME
+        if settings.SEO_BLOG_TITLE:
+            context['page_title'] = settings.SEO_BLOG_TITLE
+        else:
+            context['page_title'] = settings.BLOG_NAME
+        if settings.SEO_BLOG_DESCRIPTION:
+            context['page_description'] = settings.SEO_BLOG_DESCRIPTION
+        elif settings.BLOG_DESCRIPTION:
+            context['page_description'] = settings.BLOG_DESCRIPTION
         context['featured_pages'] = Page.objects.filter(homepage_featured=True)
         context['all_photos'] = Photo.objects.all()
-        if settings.BLOG_DESCRIPTION:
-            context['page_description'] = settings.BLOG_DESCRIPTION
         context['tag_cloud'] = generate_tag_cloud()
         return context
 
