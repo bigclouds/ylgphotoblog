@@ -298,3 +298,24 @@ body {
 	padding-bottom: 1em;
 	font-size: 0.9em;
 }
+
+.social-footer {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 0.2em;
+
+}
+
+.social-footer h2 {
+    font-family: 'Amatic SC',  cursive;
+    margin-bottom: 0;
+}
+
+.social-footer a {
+    text-decoration: none;
+    color: #333;
+}
+
+.social-footer a:hover {
+    color: #000;
+}

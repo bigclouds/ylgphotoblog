@@ -17,6 +17,14 @@ RELATED_TAGS_LIMIT = config('RELATED_TAGS_LIMIT', default=5, cast=int)
 SEO_BLOG_TITLE = config('SEO_BLOG_TITLE', default=None)
 SEO_BLOG_DESCRIPTION = config('SEO_BLOG_DESCRIPTION', default=None)
 SEO_NOINDEX = config('SEO_NOINDEX', default=False, cast=bool)
+SOCIAL_PROFILES = config('SOCIAL_PROFILES', default=False, cast=bool)
+GOOGLEPLUS_URL = config('GOOGLEPLUS_URL', default=None)
+FACEBOOK_URL = config('FACEBOOK_URL', default=None)
+INSTAGRAM_URL = config('INSTAGRAM_URL', default=None)
+LINKEDIN_URL = config('LINKEDIN_URL', default=None)
+PINTEREST_URL = config('PINTEREST_URL', default=None)
+TUMBLR_URL = config('TUMBLR_URL', default=None)
+TWITTER_URL = config('TWITTER_URL', default=None)
 
 
 # General config

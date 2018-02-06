@@ -13,7 +13,19 @@
 	<div class="container-fluid">
 		{% block content %}
 		{% endblock content %}
-		<hr>
+		<hr class="mx-5">
+		{% if config.SOCIAL_PROFILES %}
+		<div class="social-footer">
+			<h2>Find me on</h2>
+			{% if config.GOOGLEPLUS_URL %}<a href="{{ config.GOOGLEPLUS_URL }}" target="_blank"><i class="fab fa-google-plus-square"></i></a>{% endif %}
+			{% if config.FACEBOOK_URL %}<a href="{{ config.FACEBOOK_URL }}" target="_blank"><i class="fab fa-facebook-square"></i></a>{% endif %}
+			{% if config.INSTAGRAM_URL %}<a href="{{ config.INSTAGRAM_URL }}" target="_blank"><i class="fab fa-instagram"></i></a>{% endif %}
+			{% if config.LINKEDIN_URL %}<a href="{{ config.LINKEDIN_URL }}" target="_blank"><i class="fab fa-linkedin"></i></a>{% endif %}
+			{% if config.PINTEREST_URL %}<a href="{{ config.PINTEREST_URL }}" target="_blank"><i class="fab fa-pinterest-square"></i></a>{% endif %}
+			{% if config.TUMBLR_URL %}<a href="{{ config.TUMBLR_URL }}" target="_blank"><i class="fab fa-tumblr-square"></i></a>{% endif %}
+			{% if config.TWITTER_URL %}<a href="{{ config.TWITTER_URL }}" target="_blank"><i class="fab fa-twitter-square"></i></a>{% endif %}
+		</div>
+		{% endif %}
 		<div class="footer">Copyright &copy; 2018 {{ config.BLOG_NAME }}</div>
 	</div>
 	{% include 'website/scripts.html' %}
