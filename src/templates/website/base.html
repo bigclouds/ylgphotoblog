@@ -17,6 +17,7 @@
 		{% if config.SOCIAL_PROFILES %}
 		<div class="social-footer">
 			<h2>Find me on</h2>
+			{% if config.DEVIANTART_URL %}<a href="{{ config.DEVIANTART_URL }}" target="_blank"><i class="fab fa-deviantart"></i></a>{% endif %}
 			{% if config.GOOGLEPLUS_URL %}<a href="{{ config.GOOGLEPLUS_URL }}" target="_blank"><i class="fab fa-google-plus-square"></i></a>{% endif %}
 			{% if config.FACEBOOK_URL %}<a href="{{ config.FACEBOOK_URL }}" target="_blank"><i class="fab fa-facebook-square"></i></a>{% endif %}
 			{% if config.INSTAGRAM_URL %}<a href="{{ config.INSTAGRAM_URL }}" target="_blank"><i class="fab fa-instagram"></i></a>{% endif %}

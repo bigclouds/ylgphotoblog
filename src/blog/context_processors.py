@@ -9,6 +9,7 @@ def config_processor(request):
        'BLOG_DESCRIPTION': settings.BLOG_DESCRIPTION,
        'SEO_NOINDEX': settings.SEO_NOINDEX,
        'SOCIAL_PROFILES': settings.SOCIAL_PROFILES,
+       'DEVIANTART_URL': settings.DEVIANTART_URL,
        'GOOGLEPLUS_URL': settings.GOOGLEPLUS_URL,
        'FACEBOOK_URL': settings.FACEBOOK_URL,
        'INSTAGRAM_URL': settings.INSTAGRAM_URL,
