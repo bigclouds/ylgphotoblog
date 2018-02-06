@@ -15,7 +15,7 @@ def send_contact_form_email(from_email, message):
 
 def contact_page(request):
     view_name = 'contact-page'
-    page_title = 'Contact - {}'.format(settings.BLOG_NAME)
+    page_title = settings.CONTACT_PAGE_TITLE
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():

@@ -9,6 +9,8 @@ from decouple import config
 BLOG_NAME = config('BLOG_NAME', default='Photoblog')
 BLOG_DESCRIPTION = config('BLOG_DESCRIPTION', default=None)
 CONTACT_FORM_EMAIL = config('CONTACT_FORM_EMAIL')
+CONTACT_PAGE_TITLE = config('CONTACT_PAGE_TITLE', default='Contact')
+CONTACT_PAGE_SLUG = config('CONTACT_PAGE_SLUG', default='contact')
 CONTACT_PAGE_DESCRIPTION = config(
     'CONTACT_PAGE_DESCRIPTION',
     default='Send me a message using the form below.')

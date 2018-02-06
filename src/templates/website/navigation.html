@@ -17,7 +17,7 @@
       </li>
       {% endfor %}
       <li class="nav-item">
-        <a class="nav-link {% if view == 'contact-page' %}active{% endif %}" href="{% url 'contact-page' %}">Contact</a>
+        <a class="nav-link {% if view == 'contact-page' %}active{% endif %}" href="{% url 'contact-page' %}">{{ config.CONTACT_PAGE_TITLE }}</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
