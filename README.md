@@ -50,3 +50,4 @@ SECRET_KEY=6b)c7q3g9+vxwnn3e7*m@%2=r3x6yub6stj4e9jv#4p=eita-#
 DEBUG=True
 DATABASE_URL=sqlite:////media/m/DATA/code/django-photoblog/src/db.sqlite3
 ```
+You can find all possible config vars in the beggining of `settings.py` file.
