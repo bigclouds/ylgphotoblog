@@ -27,7 +27,7 @@ Photoblog app written in Django. Features photo tagging and simple CMS for creat
 - config variables with python-decouple
 - optimized for Heroku deployment with gunicorn
 - production static file serving with Whitenoise
-- production media file service with Amazon S3
+- production media file serving with Amazon S3
 
 
 ### Config variables
