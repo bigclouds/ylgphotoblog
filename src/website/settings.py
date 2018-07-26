@@ -141,7 +141,7 @@ USE_TZ = True
 # Static files
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static-root')
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'src/staticroot')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
@@ -174,7 +174,7 @@ THUMBNAIL_ALIASES = {
 
 
 # CKEditor
-
+CKEDITOR_RESTRICT_BY_DATE = True
 CKEDITOR_UPLOAD_PATH = ""
 CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
@@ -196,5 +196,4 @@ CKEDITOR_CONFIGS = {
             ]),
         'language': 'en',
     },
-
 }

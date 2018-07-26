@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 from ckeditor_uploader.fields import RichTextUploadingField
+from ckeditor.fields import RichTextField
 from easy_thumbnails.fields import ThumbnailerImageField
 from tagging.fields import TagField
 
@@ -11,7 +12,8 @@ class Photo(models.Model):
     date = models.DateTimeField('published date', blank=True)
     title = models.CharField(max_length=200)
     image = ThumbnailerImageField()
-    description = models.TextField(blank=True, null=True)
+    #description = models.TextField(blank=True, null=True)
+    description = RichTextField()
     tags = TagField()
 
     def save(self, *args, **kwargs):

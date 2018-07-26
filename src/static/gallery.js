@@ -36,7 +36,7 @@ $('#modal').on('show.bs.modal', function (event) {
   var tags = slide.data('tags');
   var date = slide.data('date');
   ($('.photo-title')).text(title);
-  ($('.photo-description')).text(description);
+  ($('.photo-description')).html(description);
   ($('.photo-tags')).text(tags);
   ($('.photo-date')).text(date);
   ($('.edit-link')).attr('href', '/admin/blog/photo/' + pk + '/change/')
@@ -66,7 +66,7 @@ $('#carouselControls').on('slide.bs.carousel', function (event) {
   var tags = relatedTarget.data('tags');
   var date = relatedTarget.data('date');
   ($('.photo-title')).text(title);
-  ($('.photo-description')).text(description);
+  ($('.photo-description')).html(description);
   ($('.photo-tags')).text(tags);
   ($('.photo-date')).text(date);
   ($('.edit-link')).attr('href', '/admin/blog/photo/' + pk + '/change/');

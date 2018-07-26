@@ -45,7 +45,7 @@ def generate_related_tags(tag):
 class HomepageView(ListView):
     model = Photo
     context_object_name = 'photos'
-    paginate_by = 10
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
