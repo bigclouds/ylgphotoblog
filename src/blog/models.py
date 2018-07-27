@@ -19,6 +19,8 @@ class Photo(models.Model):
     def save(self, *args, **kwargs):
         if not self.date:
             self.date = timezone.now()
+        if not self.tags:
+            self.tags = self.date.strftime("%Y-%m-%d")
         super().save(*args, **kwargs)
 
     def __str__(self):

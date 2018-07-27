@@ -170,7 +170,7 @@ body {
 }
 
 .gallery-modal .modal-body {
-    padding: 0;
+    padding: 1px;
     background-color:  #fdf2e9;
 }
 
