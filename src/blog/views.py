@@ -2,6 +2,9 @@ from django.conf import settings
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.db.models.query import QuerySet
 
 from tagging.models import Tag
 from tagging.utils import LOGARITHMIC
@@ -10,12 +13,12 @@ from tagging.views import TaggedObjectList
 from .models import Page, Photo
 
 
-def generate_tag_cloud(nolimit=False):
+def generate_tag_cloud(filters=None, nolimit=False):
     cloud = Tag.objects.cloud_for_model(
         Photo,
         steps=9,
         distribution=LOGARITHMIC,
-        filters=None,
+        filters=filters,
         min_count=None)
     if not nolimit:
         limit = settings.TAG_CLOUD_LIMIT
@@ -41,13 +44,22 @@ def generate_related_tags(tag):
             tags.remove(min_tag)
     return tags
 
-
 class HomepageView(ListView):
     model = Photo
     context_object_name = 'photos'
     paginate_by = 5
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get_queryset(self):
+        u = self.request.user
+        s = QuerySet(model=Photo).filter(author_id=u.id)
+        return QuerySet(model=Photo).filter(author_id=u.id)
+
     def get_context_data(self, **kwargs):
+        u = self.request.user
         context = super().get_context_data(**kwargs)
         context['view'] = 'homepage-view'
         if settings.SEO_BLOG_TITLE:
@@ -59,8 +71,12 @@ class HomepageView(ListView):
         elif settings.BLOG_DESCRIPTION:
             context['page_description'] = settings.BLOG_DESCRIPTION
         context['featured_pages'] = Page.objects.filter(homepage_featured=True)
-        context['all_photos'] = Photo.objects.all()
-        context['tag_cloud'] = generate_tag_cloud()
+        if u.is_superuser:
+            context['all_photos'] = Photo.objects.all()
+        else:
+            context['all_photos'] = Photo.objects.filter(author_id=u.id)
+        filters = dict(author_id=u.id)
+        context['tag_cloud'] = generate_tag_cloud(filters=filters)
         return context
 
 
@@ -71,12 +87,17 @@ class TagView(TaggedObjectList):
     allow_empty = True
 
     def get_context_data(self, **kwargs):
+        u = self.request.user
         context = super().get_context_data(**kwargs)
         context['view'] = 'tag-view'
         context['page_title'] = '#{} photos'.format(self.tag)
-        context['all_photos'] = Photo.objects.all()
+        if u.is_superuser:
+            context['all_photos'] = Photo.objects.all()
+        else:
+            context['all_photos'] = Photo.objects.filter(author_id=u.id)
         context['page_description'] = 'Photos tagged with #{}'.format(self.tag)
-        context['tag_cloud'] = generate_tag_cloud()
+        filters = dict(author_id=u.id)
+        context['tag_cloud'] = generate_tag_cloud(filters=filters)
         context['related_tags'] = generate_related_tags(self.tag)
         return context
 
@@ -102,7 +123,9 @@ class PageView(DetailView):
 
 
 def tag_list(request):
-    tag_cloud = generate_tag_cloud(nolimit=True)
+    u = request.user
+    filters = dict(author_id=u.id)
+    tag_cloud = generate_tag_cloud(nolimit=True, filters=filters)
     template = 'blog/tag_list.html'
     context = {
         'page_title': 'Tags',

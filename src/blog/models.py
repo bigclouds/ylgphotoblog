@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
@@ -20,7 +21,7 @@ class Photo(models.Model):
         if not self.date:
             self.date = timezone.now()
         if not self.tags:
-            self.tags = self.date.strftime("%Y-%m-%d")
+            self.tags = self.date.strftime(settings.TAGS_FORMAT)
         super().save(*args, **kwargs)
 
     def __str__(self):

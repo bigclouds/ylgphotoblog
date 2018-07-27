@@ -5,7 +5,6 @@ from decouple import config
 
 
 # Blog config
-
 BLOG_NAME = config('BLOG_NAME', default='Photoblog')
 BLOG_DESCRIPTION = config('BLOG_DESCRIPTION', default=None)
 CONTACT_FORM_EMAIL = config('CONTACT_FORM_EMAIL')
@@ -28,19 +27,20 @@ LINKEDIN_URL = config('LINKEDIN_URL', default=None)
 PINTEREST_URL = config('PINTEREST_URL', default=None)
 TUMBLR_URL = config('TUMBLR_URL', default=None)
 TWITTER_URL = config('TWITTER_URL', default=None)
-
+TAGS_FORMAT = "%Y-%m-%d"
 
 # General config
-
 ALLOWED_HOSTS = ['*']
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = config('DEBUG', default=False, cast=bool)
 SECRET_KEY = config('SECRET_KEY')
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+# LoginUrl
+LOGIN_URL="/admin/login/"
+
 
 # Database
-
 DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL'),
@@ -50,7 +50,6 @@ DATABASES = {
 
 
 # Email backend
-
 if DEBUG:
     #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     EMAIL_USE_TLS = False
@@ -69,13 +68,13 @@ else:
 # App config
 
 INSTALLED_APPS = [
-    'blog.apps.BlogConfig',
-    'contact_form.apps.ContactFormConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'blog.apps.BlogConfig',
+    'contact_form.apps.ContactFormConfig',
     'django.contrib.staticfiles',
     'easy_thumbnails',
     'tagging',
@@ -156,7 +155,6 @@ MEDIA_URL = '/media/'
 
 
 # S3 Media Storage
-
 if not DEBUG:
     AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
     AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
@@ -169,7 +167,6 @@ if not DEBUG:
 
 
 # Thumbnails
-
 THUMBNAIL_ALIASES = {
     '': {
         'medium': {'size': (500, 500), 'crop': True},
@@ -179,6 +176,8 @@ THUMBNAIL_ALIASES = {
 
 
 # CKEditor
+CKEDITOR_BROWSE_SHOW_DIRS = False
+CKEDITOR_RESTRICT_BY_USER = True
 CKEDITOR_RESTRICT_BY_DATE = True
 CKEDITOR_UPLOAD_PATH = ""
 CKEDITOR_IMAGE_BACKEND = 'pillow'
