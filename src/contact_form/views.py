@@ -9,8 +9,8 @@ from .forms import ContactForm
 
 def send_contact_form_email(from_email, message):
     to_emails = [settings.CONTACT_FORM_EMAIL]
-    subject = '{} contact form'.format(settings.BLOG_NAME)
-    send_mail(subject, message, from_email, to_emails, fail_silently=False)
+    subject = '{} contact from {}'.format(settings.BLOG_NAME, from_email)
+    send_mail(subject, message, to_emails[0], to_emails, fail_silently=False)
 
 
 def contact_page(request):
