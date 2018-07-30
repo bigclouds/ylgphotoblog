@@ -47,7 +47,7 @@ def generate_related_tags(tag):
 class HomepageView(ListView):
     model = Photo
     context_object_name = 'photos'
-    paginate_by = 5
+    paginate_by = 10
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -55,11 +55,14 @@ class HomepageView(ListView):
 
     def get_queryset(self):
         u = self.request.user
-        s = QuerySet(model=Photo).filter(author_id=u.id)
-        return QuerySet(model=Photo).filter(author_id=u.id)
+        filters = dict()
+        if not u.is_superuser:
+            filters = dict(author_id=u.id)
+        return QuerySet(model=Photo).filter(**filters)
 
     def get_context_data(self, **kwargs):
         u = self.request.user
+        filters = None
         context = super().get_context_data(**kwargs)
         context['view'] = 'homepage-view'
         if settings.SEO_BLOG_TITLE:
@@ -70,12 +73,13 @@ class HomepageView(ListView):
             context['page_description'] = settings.SEO_BLOG_DESCRIPTION
         elif settings.BLOG_DESCRIPTION:
             context['page_description'] = settings.BLOG_DESCRIPTION
+
         context['featured_pages'] = Page.objects.filter(homepage_featured=True)
         if u.is_superuser:
             context['all_photos'] = Photo.objects.all()
         else:
             context['all_photos'] = Photo.objects.filter(author_id=u.id)
-        filters = dict(author_id=u.id)
+            filters = dict(author_id=u.id)
         context['tag_cloud'] = generate_tag_cloud(filters=filters)
         return context
 
@@ -86,18 +90,28 @@ class TagView(TaggedObjectList):
     paginate_by = 10
     allow_empty = True
 
+    #def get_queryset(self):
+        #u = self.request.user
+        #filters = None
+        #if not u.is_superuser:
+        #    filters = dict(author_id=u.id)
+        #self.tag_instance = QuerySet(model=Tag).filter(name=self.tag)
+        #return QuerySet(model=Tag).filter(name=self.tag)
+        #return QuerySet(model=Photo).filter(**filters)
+
     def get_context_data(self, **kwargs):
         u = self.request.user
+        filters = dict(tags__icontains=self.tag)
         context = super().get_context_data(**kwargs)
         context['view'] = 'tag-view'
         context['page_title'] = '#{} photos'.format(self.tag)
         if u.is_superuser:
-            context['all_photos'] = Photo.objects.all()
+            context['all_photos'] = Photo.objects.filter(**filters)
         else:
-            context['all_photos'] = Photo.objects.filter(author_id=u.id)
-        context['page_description'] = 'Photos tagged with #{}'.format(self.tag)
-        filters = dict(author_id=u.id)
+            filters.update(dict(author_id=u.id))
+            context['all_photos'] = Photo.objects.filter(**filters)
         context['tag_cloud'] = generate_tag_cloud(filters=filters)
+        context['page_description'] = 'Photos tagged with #{}'.format(self.tag)
         context['related_tags'] = generate_related_tags(self.tag)
         return context
 
@@ -124,7 +138,10 @@ class PageView(DetailView):
 
 def tag_list(request):
     u = request.user
-    filters = dict(author_id=u.id)
+    filters = None
+    if not u.is_superuser:
+        filters = dict(author_id=u.id)
+
     tag_cloud = generate_tag_cloud(nolimit=True, filters=filters)
     template = 'blog/tag_list.html'
     context = {
