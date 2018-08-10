@@ -1,9 +1,9 @@
 from django.urls import path
 
-#from .views import HomepageView, PageView, TagView, tag_list
+from .views import HomeVideoView, TagView, tag_list
 
-#urlpatterns = [
-#    path('', HomepageView.as_view(), name='homepage-view'),
-#    path('tags/', tag_list, name='tag-list'),
-#    path('tag/<str:tag>/', TagView.as_view(), name='tag-view'),
-#]
+urlpatterns = [
+    path('', HomeVideoView.as_view(), name='homevideo-view'),
+#    path('tags/', tag_list, name='videotag-list'),
+#    path('tag/<str:tag>/', TagView.as_view(), name='videotag-view'),
+]

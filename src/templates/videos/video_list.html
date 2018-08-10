@@ -1,0 +1,130 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% load tagging_tags %}
+
+{% block meta %}
+<title>{{ page_title }}</title>
+{% if page_description %}<meta name="description" content="{{ page_description }}"/>{% endif %}
+{% endblock meta %} 
+
+{% block content %}
+<div class="row no-gutters gallery infinite-container">
+  <div class="col-md-3 align-self-center tag-cloud">
+    {% for tag_ in tag_cloud %}
+      <a class="tag {% if tag_ == tag %}active{% endif %}" style="font-size:{{ tag_.font_size|add:8 }}px" href="{% url 'tag-view' tag=tag_ %}">{{ tag_ }}</a>
+    {% endfor %}
+      <a class="tag more-tag" href="{% url 'tag-list' %}">More tags</a>
+  </div>
+
+  {% if view == 'tag-view' %}
+  <div class="col-md-3 heading-col align-self-center">
+    <h1>{{ tag }}</h1>
+    <hr>
+    <p>Pictures tagged with #{{ tag }}</p>
+    {% if request.user.is_superuser %}
+       <a href="{% url 'admin:tagging_tag_change' tag.pk %}" target="_blank">Edit tag</a>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if view == 'homepage-view' %}
+  {% for page in featured_pages %}
+    <div class="col-md-3 thumbnail-col featured-col">
+        <a href="{% url 'page-view' page.slug %}"><img class="img-fluid" src="{{ page.featured_image|thumbnail_url:'medium' }}" alt="{{ page.title }}">
+        <div class="featured-title"><span>{{ page.title }}</span></div>
+        </a>
+    </div>
+  {% endfor %} 
+  {% endif %}
+
+  {% for photo in photos.all %}
+    <div class="col-md-3 thumbnail-col infinite-item">
+      <div data-toggle="modal" data-target="#modal" data-slide="#slide-{{ photo.pk }}">
+        <img class="img-fluid thumbnail-image" src="{{ photo.image|thumbnail_url:'medium' }}" alt="Hello, World!">
+        <div class="thumbnail-title">{{ photo.title }}</div>
+      </div>
+    </div>
+  {% endfor %}
+  
+  {% if view == 'tag-view' %}
+  {% if related_tags %}
+  <div class="col-md-3 align-self-center related-tags-col">
+    <h2>See also</h5>
+    <hr>
+      {% for related_tag in related_tags %}
+        <a href="{% url 'tag-view' tag=related_tag %}">#{{ related_tag }}</a>
+      {% endfor %}
+  </div>
+  {% endif %}
+  {% endif %}
+</div>
+
+<div class="loading" style="display: none;">
+  {% include 'website/spinner.svg' %}
+</div>
+
+{% if page_obj.has_next %}
+  <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">More</a>
+{% endif %}
+
+<!-- Start Modal -->
+<div class="modal gallery-modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <div class="row">
+            <div class="col-md-8" top="0" padding-top="1%">
+              <div id="carouselControls" class="carousel" data-interval="false">
+                <div class="carousel-inner">
+                  {% for photo in all_videos %}
+                  <div id="slide-{{ photo.pk }}" class="carousel-item" data-pk="{{ photo.pk }}"  data-description="{{ photo.description }}" data-tags="{{ photo.tags }}" data-date="{{ photo.date }}">
+                    <img class="carousel-image img-fluid" src="" alt="">
+                  </div>
+                  {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-4 photo-info">
+              <div class="container h-100">
+                <div class="row h-100">
+                  <div class="col-12">
+                    <h2 class="photo-title"></h2>
+                    <p><span class="photo-date"></span></p>
+                    <p><span class="photo-tags"></span></p>
+                    <div class="photo-description"></div>
+                    {% if request.user.is_authenticated %}
+                      <a class="edit-link" href="" target="_blank">Edit photo</a>
+                    {% endif %}
+                  </div>
+                  <div class="col-12">
+                    <div class="social-icons">
+                      <i class="fab fa-facebook"></i>
+                      <i class="fab fa-instagram"></i>
+                      <i class="fab fa-pinterest"></i>
+                      <i class="fab fa-google-plus"></i>
+                    </div>
+                </div>
+                <div class="row align-items-end h-100">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+<!-- End Modal -->
+{% endblock content %}

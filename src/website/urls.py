@@ -5,14 +5,13 @@ from django.urls import include, path
 from django.views.generic import RedirectView
 import blog
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('%s/' % settings.CONTACT_PAGE_SLUG, include('contact_form.urls')),
     path('blog/', include('blog.urls')),
+    path('videos/', include('videos.urls')),
     path(r'', blog.views.HomeView),
-    #path('video', include('video.urls')),
 ]
 
 

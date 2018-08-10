@@ -1,0 +1,23 @@
+{% extends 'website/base.html' %}
+
+{% block meta %}
+<title>{{ page_title }}</title>
+{% endblock meta %} 
+
+{% block content %}
+<div class="container page-content">
+	<div class="row no-gutters">
+        <div class="col-md-12 page-lead">
+            <h1>{{ page_title }}</h1>
+			<hr>
+        </div>
+	</div>
+	<div class="row no-gutters tag-list">
+		<div class="col page-content">
+		    {% for tag_ in tag_cloud %}
+		      <a class="tag {% if tag_ == tag %}active{% endif %}" style="font-size:{{ tag_.font_size|add:8 }}px" href="{% url 'tag-view' tag=tag_ %}">{{ tag_ }} ({{ tag_.count }})</a>
+		    {% endfor %}
+		</div>
+	</div>
+</div>
+{% endblock content %}

@@ -14,6 +14,7 @@ class Video(models.Model):
 	duration_field = 'video_duration',
 	thumbnail_field = 'video_thumbnail')
     description = models.CharField(max_length=200)
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE, default="")
     date = models.DateTimeField('published date', blank=True)
     video_width = models.IntegerField(null = True, blank = True)
     video_height = models.IntegerField(null = True, blank = True)

@@ -19,7 +19,7 @@ class AuthDecadeBornListFilter(admin.SimpleListFilter):
             return queryset.filter()
 
 class VideoAdmin(admin.ModelAdmin):
-    exclude = ('date',)
+    exclude = ('date','author',)
     list_filter = (AuthDecadeBornListFilter,)
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
