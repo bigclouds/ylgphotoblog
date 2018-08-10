@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'blog.apps.BlogConfig',
+    'videos.apps.VideosConfig',
     'contact_form.apps.ContactFormConfig',
     'django.contrib.staticfiles',
     'easy_thumbnails',
@@ -145,14 +146,17 @@ USE_TZ = True
 # Static files
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'src/staticroot')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'src/static')
 
+
+STATIC_ROOT1 = os.path.join(BASE_DIR, 'html5media')
+STATIC_URL1 = '/html/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'staticfiles'),
+]
 
 # S3 Media Storage
 if not DEBUG:

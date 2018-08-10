@@ -62,7 +62,6 @@ var CKBUILDER_CONFIG = {
 		'contextmenu' : 1,
 		'copyformatting' : 1,
 		'dialogadvtab' : 1,
-		'lineheight' : 1,
 		'div' : 1,
 		'elementspath' : 1,
 		'enterkey' : 1,

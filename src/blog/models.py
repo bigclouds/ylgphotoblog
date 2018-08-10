@@ -13,7 +13,6 @@ class Photo(models.Model):
     date = models.DateTimeField('published date', blank=True)
     title = models.CharField(max_length=200)
     image = ThumbnailerImageField()
-    #description = models.TextField(blank=True, null=True)
     description = RichTextField()
     tags = TagField()
 

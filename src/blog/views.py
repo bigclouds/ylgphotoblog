@@ -5,13 +5,15 @@ from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.db.models.query import QuerySet
-
+from django.http import HttpResponseRedirect
 from tagging.models import Tag
 from tagging.utils import LOGARITHMIC
 from tagging.views import TaggedObjectList
 
 from .models import Page, Photo
 
+def HomeView(request):
+    return HttpResponseRedirect("/blog")
 
 def generate_tag_cloud(filters=None, nolimit=False):
     cloud = Tag.objects.cloud_for_model(
