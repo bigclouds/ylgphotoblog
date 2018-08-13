@@ -52,11 +52,13 @@ class HomeVideoView(View):
     model = Video
     context_object_name = 'videos'
     paginate_by = 10
-    template_name = "/html/dist/www/index.html"
+    #template_name = "/html/dist/www/index.html"
+    #template_name = "videos/index.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
+        #return render(self.request,'videos/index.html')
 
     def get_queryset(self):
         u = self.request.user

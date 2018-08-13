@@ -11,6 +11,9 @@
       <li class="nav-item {% if view == 'homepage-view' %}active{% endif %}">
         <a class="nav-link" href="{% url 'homepage-view' %}">Home <span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item {% if view == 'homevideo-view' %}active{% endif %}">
+        <a class="nav-link" href="{% url 'homevideo-view' %}">Video <span class="sr-only">(current)</span></a>
+      </li>
       {% for item in nav_items %}
       <li class="nav-item">
         <a class="nav-link {% if item.slug in request.path %}active{% endif %}" href="{% url 'page-view' slug=item.slug %}">{{ item.title }}</a>
