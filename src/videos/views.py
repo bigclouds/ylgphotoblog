@@ -57,29 +57,28 @@ class HomeVideoView(View):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
-        #return render(self.request,'videos/index.html')
+        super().dispatch(*args, **kwargs)
+        context = {}
+        context['view'] = 'homevideo-view'
+        context['page_title'] = "Video SHow" #settings.BLOG_NAME
+        context['page_description'] = "Video Desc"  #settings.BLOG_DESCRIPTION
+        return render(self.request,'videos/index.html', context=context)
 
     def get_queryset(self):
+        print("YYYYYY ", self.request.user)
         u = self.request.user
         filters = dict()
         if not u.is_superuser:
             filters = dict(author_id=u.id)
         return QuerySet(model=Video).filter(**filters)
 
-    def old_get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs):
         u = self.request.user
         filters = None
         context = super().get_context_data(**kwargs)
         context['view'] = 'homevideo-view'
-        if settings.SEO_BLOG_TITLE:
-            context['page_title'] = settings.SEO_BLOG_TITLE
-        else:
-            context['page_title'] = settings.BLOG_NAME
-        if settings.SEO_BLOG_DESCRIPTION:
-            context['page_description'] = settings.SEO_BLOG_DESCRIPTION
-        elif settings.BLOG_DESCRIPTION:
-            context['page_description'] = settings.BLOG_DESCRIPTION
+        context['page_title'] = "Video SHow" #settings.BLOG_NAME
+        context['page_description'] = "Video Desc"  #settings.BLOG_DESCRIPTION
 
         if u.is_superuser:
             context['all_videos'] = Video.objects.all()

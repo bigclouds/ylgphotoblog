@@ -1,4 +1,7 @@
+from django.conf import settings
 from django.db import models
+from django.utils import timezone
+from tagging.fields import TagField
 from ckeditor.fields import RichTextField
 from easy_thumbnails.fields import ThumbnailerImageField
 from videokit.models import VideoSpecField
@@ -23,6 +26,7 @@ class Video(models.Model):
     video_duration = models.IntegerField(null = True, blank = True, editable=True)
     video_thumbnail = models.ImageField(null = True, blank = True)
     shared = models.BooleanField(default=True)
+    tags = TagField()
     #video_mp4 = VideoSpecField(source = 'video', format = 'mp4')
     #video_ogg = VideoSpecField(source = 'video', format = 'ogg')
     #video_webm = VideoSpecField(source = 'video', format = 'webm')

@@ -7,6 +7,9 @@
 	{% block meta %}{% endblock meta %}
 	{% if config.SEO_NOINDEX == True %}<meta name="robots" content="noindex">{% endif %}
 	{% include 'website/styles.html' %}
+    {% if view == 'homevideo-view' %}
+	{% include 'videos/video.html' %}
+    {% endif %}
 </head>
 <body>
 	{% include 'website/navigation.html' %}
