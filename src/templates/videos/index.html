@@ -8,13 +8,13 @@
             </hgroup>
             <div class="videos">
                 <div class="grid_8">
-                    <video id="video" class="video" poster="/html/dist/media/poster.jpg" width="618" height="347" controls preload>
-                        <source src="/html/dist/media/video.mp4" type="video/mp4" media="only screen and (min-device-width: 568px)"></source>
-                        <source src="/html/dist/media/video.iphone.mp4" type="video/mp4" media="only screen and (max-device-width: 568px)"></source>
+                    <video id="video" class="video" poster="/html/dist/media/poster.jpg" width="638" height="347" controls preload>
+                        <source src="/html/dist/media/video.mp4" type="video/mp4" media="only screen and (min-device-width: 588px)"></source>
+                        <source src="/html/dist/media/video.iphone.mp4" type="video/mp4" media="only screen and (max-device-width: 588px)"></source>
                         <source src="/html/dist/media/video.ogv" type="video/ogv"></source>
                     </video>
                 </div>
-                <div class="grid_4">
+                <div class="grid_4" align="left">
                     <p>All it takes is a single line of code to make HTML5 video and audio tags work in all major browsers.</p>
                     <ul>
                         <li>Nothing to install.</li>
@@ -29,10 +29,22 @@
                 <div class="clear"></div>
             </div>
         </header>
-	    <div>
-		  <a href="javascript:void(0)" onclick="change_video(this)">1C670164D5ACC70AA7AC327F2C77BBBC.mp4</a> 
-		  <a href="javascript:void(0)" onclick="change_video(this)">F8080164F10E4B6505790B89797BAF05.mp4</a> 
-		  <a href="javascript:void(0)" onclick="change_video(this);">video.mp4</a> 
+	    <div align="center">
+                <a href="javascript:void(0)" onclick="change_video(this)" playurl="/html/dist/media/1C670164D5ACC70AA7AC327F2C77BBBC.mp4">1C670164D5ACC70AA7AC327F2C77BBBC.mp4</a> <br>
+                <a href="javascript:void(0)" onclick="change_video(this)" playurl="/html/dist/media/F8080164F10E4B6505790B89797BAF05.mp4">F8080164F10E4B6505790B89797BAF05.mp4</a> <br>
+		        <a href="javascript:void(0)" onclick="change_video(this)" playurl="/html/dist/media/video.mp4">video.mp4</a> 
 	    </div>
+        <div align="center">
+          {% for video in all_videos %}
+            <div id="slide-{{ video.pk }}" class="divvideo" border=1px>
+                    <a href="javascript:void(0)" onclick="change_video(this)" playurl="/media/{{ video.video }}">
+                        <img  width="250" height="250" src="/media/{{ video.video_thumbnail }}" alt="{{ video.description }}"><br>
+                    </a>
+                    <a href="javascript:void(0)" onclick="change_video(this)" playurl="/media/{{ video.video }}">{{ video.description }}</a>
+                    <br>{{ video.tags }}     {{ video.date }}</br>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="clear"></div>
 </div>
 {% endblock content %}

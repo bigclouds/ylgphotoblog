@@ -13,9 +13,6 @@ from tagging.views import TaggedObjectList
 
 from .models import Video
 
-def HomeView(request):
-    return HttpResponseRedirect("/blog")
-
 def generate_tag_cloud(filters=None, nolimit=False):
     cloud = Tag.objects.cloud_for_model(
         Video,
@@ -47,25 +44,24 @@ def generate_related_tags(tag):
             tags.remove(min_tag)
     return tags
 
-#class HomeVideoView(ListView):
-class HomeVideoView(View):
+#class HomeVideoView(View):
+class HomeVideoView(ListView):
     model = Video
     context_object_name = 'videos'
     paginate_by = 10
-    #template_name = "/html/dist/www/index.html"
-    #template_name = "videos/index.html"
+    template_name = "videos/index.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        super().dispatch(*args, **kwargs)
-        context = {}
-        context['view'] = 'homevideo-view'
-        context['page_title'] = "Video SHow" #settings.BLOG_NAME
-        context['page_description'] = "Video Desc"  #settings.BLOG_DESCRIPTION
-        return render(self.request,'videos/index.html', context=context)
+        d = super().dispatch(*args, **kwargs)
+        context = self.get_context_data(**kwargs)
+        #context['view'] = 'homevideo-view'
+        #context['page_title'] = "Video SHow" #settings.BLOG_NAME
+        #context['page_description'] = "Video Desc"  #settings.BLOG_DESCRIPTION
+        return render(self.request, "videos/index.html", context=context)
+        #return render(self.request, "videos/index.html")
 
     def get_queryset(self):
-        print("YYYYYY ", self.request.user)
         u = self.request.user
         filters = dict()
         if not u.is_superuser:
@@ -87,10 +83,6 @@ class HomeVideoView(View):
             filters = dict(author_id=u.id)
         #context['tag_cloud'] = generate_tag_cloud(filters=filters)
         return context
-
-    def get(self, request, *args, **kwargs):
-        return HttpResponseRedirect("/html/dist/www/index.html")
-
 
 
 class TagView(TaggedObjectList):

@@ -43,10 +43,11 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
       function change_video(e){
-        var f = e.innerHTML;
+        <!-- var f = e.innerHTML; -->
+        var f = e.getAttribute('playurl');
         var v = document.getElementById("video");
         v.autoplay = "autoplay"
-        v.src = "/html/dist/media/"+f;
+        v.src = f;
       }
 </script>
 {% endif %}
